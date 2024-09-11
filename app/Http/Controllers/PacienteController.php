@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\PacienteService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
 {
@@ -16,7 +17,8 @@ class PacienteController extends Controller
 
     public function index()
     {
-        return response()->json($this->pacienteService->getAllPacientes());
+        $user = Auth::user();
+        return $user->pacientes;
     }
 
     public function store(Request $request)
@@ -34,9 +36,28 @@ class PacienteController extends Controller
         return response()->json($paciente, 201);
     }
 
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nome' => 'required|string',
+            'nascimento' => 'required|date',
+            'profissao' => 'nullable|string',
+            'endereco' => 'nullable|string',
+            'telefones' => 'nullable|string',
+        ]);
+
+        $user = Auth::user();
+        $paciente = $user->pacientes()->create($validatedData); 
+
+        return response()->json($paciente, 201);
+    }
+
     public function show($id)
     {
-        return response()->json($this->pacienteService->getPacienteById($id));
+        $user = Auth::user();
+        $paciente = $user->pacientes()->findOrFail($id); // Encontra o paciente associado ao usuário
+
+        return response()->json($paciente);
     }
 }
 
