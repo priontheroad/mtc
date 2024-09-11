@@ -25,8 +25,7 @@ Route::get('/pacientes', [PacienteController::class, 'index']);
 Route::post('/pacientes', [PacienteController::class, 'store']);
 Route::get('/pacientes/{id}', [PacienteController::class, 'show']);
 Route::apiResource('anamneses', AnamneseController::class);
-
 Route::post('/pacientes/{id}/anamneses', [AnamneseController::class, 'store']);
 Route::get('/anamneses/{id}', [AnamneseController::class, 'show']);
+Route::get('/sugestoes-pontos', [SugestaoPontoController::class, 'index']);
 
-Route::get('/anamneses/{id}/sugestoes', [SugestaoPontoController::class, 'show']);

@@ -9,6 +9,8 @@ class SugestaoPonto extends Model
 {
     use HasFactory;
 
+    protected $table = 'sugestoes_pontos';
+
     protected $fillable = [
         'ponto',
         'descricao',
