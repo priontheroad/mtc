@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SugestaoPonto extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'ponto',
+        'descricao',
+    ];
 }

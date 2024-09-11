@@ -10,7 +10,6 @@ class CreateSugestoesPontosTable extends Migration
     {
         Schema::create('sugestoes_pontos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anamnese_id')->constrained()->onDelete('cascade');
             $table->string('ponto');
             $table->string('descricao')->nullable();
             $table->timestamps();
